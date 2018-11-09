@@ -23,7 +23,7 @@ DAYS = {
         "Prompt: What are you #thankful for this Thursday?",
     ],
     4: [
-        "Friday is for #fanfic -- who's shipping what this week?"
+        "Friday is for #fanfic -- who's shipping what this week?",
         "It's Follow Friday (#ff) -- who's toots are the tops?",
     ],
     6: [
@@ -35,6 +35,7 @@ DAYS = {
 
 def toot():
     access_token = os.getenv('ACCESS_TOKEN')
+    visibility = os.getenv('VISIBILITY', 'direct')
     client = Mastodon(
         access_token=access_token,
         api_base_url='https://wandering.shop',
@@ -43,7 +44,7 @@ def toot():
     toot = f'{random.choice(DAYS[today])}\n\ncc @phildini',
     client.status_post(
         status=toot,
-        visibility='direct',
+        visibility=visibility,
     )
 
 
